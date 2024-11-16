@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db;
 using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Repositories
 {
-    public class ReservationRepository(RestaurantReservationDbContext context)
+    public class ReservationRepository(RestaurantReservationDbContext context) : IReservationRepository
     {
         private readonly RestaurantReservationDbContext _context = context;
 

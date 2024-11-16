@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db;
 using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Repositories
 {
-    public class EmployeeRepository(RestaurantReservationDbContext context)
+    public class EmployeeRepository(RestaurantReservationDbContext context) : IEmployeeRepository
     {
         private readonly RestaurantReservationDbContext _context = context;
 
@@ -33,7 +34,7 @@ namespace RestaurantReservation.API.Repositories
         public async Task DeleteAsync(int id)
         {
             var employee = await GetByIdAsync(id);
-            if (employee != null) 
+            if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 await _context.SaveChangesAsync();
