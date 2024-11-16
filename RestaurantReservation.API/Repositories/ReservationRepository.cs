@@ -41,5 +41,20 @@ namespace RestaurantReservation.API.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Reservation>> GetReservationsByCustomerAsync(int customerId)
+        {
+            return await _context.Reservations
+                           .Include(r => r.Customer)
+                           .Include(r => r.Restaurant)
+                           .Include(r => r.ReservationDate)
+                           .Where(r => r.CustomerId == customerId)
+                           .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ReservationView>> ListReservationViewAsync()
+        {
+            return await _context.ReservationsView.ToListAsync();
+        }
     }
 }
