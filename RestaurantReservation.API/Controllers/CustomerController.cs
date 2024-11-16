@@ -5,7 +5,7 @@ using RestaurantReservation.Db.DataModels;
 namespace RestaurantReservation.API.Controllers
 {
     [ApiController]
-    [Route("api/customer")]
+    [Route("api/customers")]
     public class CustomerController(ICustomerService customerService) : Controller
     {
         private readonly ICustomerService _customerService = customerService;

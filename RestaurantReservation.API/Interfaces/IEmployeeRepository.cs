@@ -9,5 +9,6 @@ namespace RestaurantReservation.API.Interfaces
         Task<IEnumerable<Employee>> GetAllAsync();
         Task<Employee> GetByIdAsync(int id);
         Task UpdateAsync(Employee employee);
+        Task<IEnumerable<Employee>> ListManagersAsync();
     }
 }

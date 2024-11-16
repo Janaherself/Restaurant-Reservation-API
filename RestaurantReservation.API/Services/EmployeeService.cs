@@ -34,5 +34,10 @@ namespace RestaurantReservation.API.Services
             // validation
             await _employeeRepository.DeleteAsync(id);
         }
+
+        public async Task<IEnumerable<Employee>> GetMnagersAsync()
+        {
+            return await _employeeRepository.ListManagersAsync();
+        }
     }
 }

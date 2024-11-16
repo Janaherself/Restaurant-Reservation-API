@@ -39,7 +39,13 @@ namespace RestaurantReservation.API.Repositories
                 _context.Employees.Remove(employee);
                 await _context.SaveChangesAsync();
             }
+        }
 
+        public async Task<IEnumerable<Employee>> ListManagersAsync()
+        {
+            return await _context.Employees
+                .Where(e => e.Position == "Manager")
+                .ToListAsync();
         }
     }
 }
