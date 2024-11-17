@@ -34,5 +34,20 @@ namespace RestaurantReservation.API.Services
             // validation
             await _orderRepository.DeleteAsync(id);
         }
+
+        public async Task<decimal> CalculateAverageOrderAmountAsync(int employeeId)
+        {
+            return await _orderRepository.CalculateAverageOrderAmountAsync(employeeId);
+        }
+
+        public async Task<IEnumerable<Order>>? ListOrdersAndMenuItemsAsync(int reservationId)
+        {
+            var orders = await _orderRepository.ListOrdersAndMenuItemsAsync(reservationId);
+            if (!orders.Any())
+            {
+                return null;
+            }
+            return orders;
+        }
     }
 }

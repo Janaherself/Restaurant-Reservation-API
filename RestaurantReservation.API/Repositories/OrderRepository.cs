@@ -40,5 +40,23 @@ namespace RestaurantReservation.API.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<decimal> CalculateAverageOrderAmountAsync(int employeeId)
+        {
+            var orders = await _context.Orders
+                                       .Where(o => o.EmployeeId == employeeId)
+                                       .ToListAsync();
+
+            return orders.Count != 0 ? orders.Average(o => o.TotalAmount) : 0;
+        }
+
+        public async Task<IEnumerable<Order>> ListOrdersAndMenuItemsAsync(int reservationId)
+        {
+            return await _context.Orders
+                                 .Include(o => o.OrderItems)
+                                 .ThenInclude(oi => oi.MenuItem)
+                                 .Where(o => o.ReservationId == reservationId)
+                                 .ToListAsync();
+        }
     }
 }

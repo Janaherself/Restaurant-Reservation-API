@@ -40,5 +40,14 @@ namespace RestaurantReservation.API.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<MenuItem>> ListOrderedMenuItemsAsync(int reservationId)
+        {
+            return await _context.OrderItems
+                           .Include(oi => oi.MenuItem)
+                           .Where(oi => oi.Order.ReservationId == reservationId)
+                           .Select(oi => oi.MenuItem)
+                           .ToListAsync();
+        }
     }
 }

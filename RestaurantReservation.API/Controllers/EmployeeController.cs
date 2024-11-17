@@ -40,7 +40,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != employee.EmployeeId)
             {
-                return BadRequest(new {message = "Invalid EmployeeId!"});
+                return BadRequest(new {message = "Invalid Employee Id!"});
             }
             await _employeeService.UpdateEmployeeAsync(employee);
             return NoContent();

@@ -9,5 +9,7 @@ namespace RestaurantReservation.API.Interfaces
         Task<IEnumerable<Order>> GetAllAsync();
         Task<Order> GetByIdAsync(int id);
         Task UpdateAsync(Order order);
+        Task<decimal> CalculateAverageOrderAmountAsync(int employeeId);
+        Task<IEnumerable<Order>> ListOrdersAndMenuItemsAsync(int reservationId);
     }
 }

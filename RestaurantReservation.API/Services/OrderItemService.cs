@@ -34,5 +34,15 @@ namespace RestaurantReservation.API.Services
             // validation
             await _orderItemRepository.DeleteAsync(id);
         }
+
+        public async Task<IEnumerable<MenuItem>>? ListOrderedMenuItemsAsync(int reservationId)
+        {
+            var menuItems = await _orderItemRepository.ListOrderedMenuItemsAsync(reservationId);
+            if (!menuItems.Any())
+            {
+                return null;
+            }
+            return menuItems;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db.DataModels;
+using RestaurantReservation.API.Interfaces;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -23,7 +23,7 @@ namespace RestaurantReservation.API.Controllers
             var customer = await _customerService.GetCustomerByIdAsync(id);
             if (customer == null)
             {
-                return NotFound(new { Message = "Invalid Id!" });
+                return NotFound(new { Message = "Invalid Customer Id!" });
             }
             return Ok(customer);
         }
@@ -32,7 +32,7 @@ namespace RestaurantReservation.API.Controllers
         public async Task<ActionResult> CreateCustomer(Customer customer)
         {
             await _customerService.CreateCustomerAsync(customer);
-            return CreatedAtAction(nameof(GetCustomer), new { id = customer.CustomerId }, customer);
+            return Created();
         }
 
         [HttpPut("{id}")]
@@ -40,7 +40,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != customer.CustomerId)
             {
-                return BadRequest(new { Message = "Invalid Id!" });
+                return BadRequest(new { Message = "Invalid Customer Id!" });
             }
 
             await _customerService.UpdateCustomerAsync(customer);
