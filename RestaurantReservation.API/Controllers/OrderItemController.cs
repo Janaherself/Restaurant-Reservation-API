@@ -26,7 +26,7 @@ namespace RestaurantReservation.API.Controllers
             var orderItem = await _orderItemService.GetOrderItemByIdAsync(id);
             if (orderItem == null)
             {
-                return NotFound(new { Message = "Invalid OrderItem Id!" });
+                return NotFound("Invalid OrderItem Id!");
             }
             return Ok(orderItem);
         }
@@ -43,7 +43,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != orderItem.OrderItemId)
             {
-                return BadRequest(new { message = "Invalid OrderItem Id!" });
+                return BadRequest("Invalid OrderItem Id!");
             }
             await _orderItemService.UpdateOrderItemAsync(orderItem);
             return NoContent();
@@ -67,7 +67,7 @@ namespace RestaurantReservation.API.Controllers
             var menuItems = await _orderItemService.ListOrderedMenuItemsAsync(reservationId);
             if (menuItems == null)
             {
-                return BadRequest(new { message = "Invalid Reservation Id!" });
+                return BadRequest("Invalid Reservation Id!");
             }
             return Ok(menuItems);
         }

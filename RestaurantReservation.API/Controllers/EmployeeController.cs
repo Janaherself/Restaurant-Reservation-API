@@ -25,7 +25,7 @@ namespace RestaurantReservation.API.Controllers
             var employee = await _employeeService.GetEmployeeByIdAsync(id);
             if (employee == null)
             {
-                return NotFound(new { Message = "Invalid Employee Id!" });
+                return NotFound("Invalid Employee Id!");
             }
             return Ok(employee);
         }
@@ -42,7 +42,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != employee.EmployeeId)
             {
-                return BadRequest(new {message = "Invalid Employee Id!"});
+                return BadRequest("Invalid Employee Id!");
             }
             await _employeeService.UpdateEmployeeAsync(employee);
             return NoContent();

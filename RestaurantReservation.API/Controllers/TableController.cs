@@ -25,7 +25,7 @@ namespace RestaurantReservation.API.Controllers
             var table = await _tableService.GetTableByIdAsync(id);
             if (table == null)
             {
-                return NotFound(new { Message = "Invalid Table Id!" });
+                return NotFound("Invalid Table Id!");
             }
             return Ok(table);
         }
@@ -42,7 +42,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != table.TableId)
             {
-                return BadRequest(new { Message = "Invalid Table Id!" });
+                return BadRequest("Invalid Table Id!");
             }
 
             await _tableService.UpdateTableAsync(table);

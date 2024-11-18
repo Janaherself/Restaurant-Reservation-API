@@ -25,7 +25,7 @@ namespace RestaurantReservation.API.Controllers
             var customer = await _customerService.GetCustomerByIdAsync(id);
             if (customer == null)
             {
-                return NotFound(new { Message = "Invalid Customer Id!" });
+                return NotFound("Invalid Customer Id!");
             }
             return Ok(customer);
         }
@@ -42,7 +42,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != customer.CustomerId)
             {
-                return BadRequest(new { Message = "Invalid Customer Id!" });
+                return BadRequest("Invalid Customer Id!");
             }
 
             await _customerService.UpdateCustomerAsync(customer);

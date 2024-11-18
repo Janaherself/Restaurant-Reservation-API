@@ -26,7 +26,7 @@ namespace RestaurantReservation.API.Controllers
             var menuItem = await _menuItemService.GetMenuItemByIdAsync(id);
             if (menuItem == null)
             {
-                return NotFound(new { Message = "Invalid Item Id!" });
+                return NotFound("Invalid Item Id!");
             }
             return Ok(menuItem);
         }
@@ -43,7 +43,7 @@ namespace RestaurantReservation.API.Controllers
         {
             if (id != menuItem.MenuItemId)
             {
-                return BadRequest(new { message = "Invalid Item Id!" });
+                return BadRequest("Invalid Item Id!");
             }
             await _menuItemService.UpdateMenuItemAsync(menuItem);
             return NoContent();
