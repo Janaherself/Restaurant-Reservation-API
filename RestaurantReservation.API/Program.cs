@@ -36,6 +36,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddSingleton(new JwtTokenGenerator(secretKey));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddDbContext<RestaurantReservationDbContext>(options => options.UseSqlServer(config.GetConnectionString("RestaurantReservationCore")));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
