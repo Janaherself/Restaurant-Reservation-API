@@ -13,9 +13,14 @@ namespace RestaurantReservation.API.Controllers
         private readonly IEmployeeService _employeeService = employeeService;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var employees = await _employeeService.GetAllEmployeesAsync();
+            if (pageNumber <= 0 || pageSize <= 0)
+            {
+                return BadRequest("Page number and page size must be greater than zero.");
+            }
+
+            var employees = await _employeeService.GetAllEmployeesAsync(pageNumber, pageSize);
             return Ok(employees);
         }
 
@@ -27,6 +32,7 @@ namespace RestaurantReservation.API.Controllers
             {
                 return NotFound("Invalid Employee Id!");
             }
+
             return Ok(employee);
         }
 
@@ -44,6 +50,7 @@ namespace RestaurantReservation.API.Controllers
             {
                 return BadRequest("Invalid Employee Id!");
             }
+
             await _employeeService.UpdateEmployeeAsync(employee);
             return NoContent();
         }

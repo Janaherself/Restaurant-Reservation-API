@@ -14,9 +14,14 @@ namespace RestaurantReservation.API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations()
+        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var reservations = await _reservationService.GetAllReservationsAsync();
+            if (pageNumber <= 0 || pageSize <= 0)
+            {
+                return BadRequest("Page number and page size must be greater than zero.");
+            }
+
+            var reservations = await _reservationService.GetAllReservationsAsync(pageNumber, pageSize);
             return Ok(reservations);
         }
 
@@ -28,6 +33,7 @@ namespace RestaurantReservation.API.Controllers
             {
                 return NotFound("Invalid Reservation Id!");
             }
+
             return Ok(reservation);
         }
 
@@ -45,6 +51,7 @@ namespace RestaurantReservation.API.Controllers
             {
                 return BadRequest("Invalid Reservation Id!");
             }
+
             await _reservationService.UpdateReservationAsync(reservation);
             return NoContent();
         }
@@ -69,6 +76,7 @@ namespace RestaurantReservation.API.Controllers
             {
                 return BadRequest("Invalid Customer Id!");
             }
+
             return Ok(reservations);
         }
     }

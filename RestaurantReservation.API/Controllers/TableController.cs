@@ -13,9 +13,14 @@ namespace RestaurantReservation.API.Controllers
         private readonly ITableService _tableService = tableService;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Table>>> GetTables()
+        public async Task<ActionResult<IEnumerable<Table>>> GetTables([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var tables = await _tableService.GetAllTablesAsync();
+            if (pageNumber <= 0 || pageSize <= 0)
+            {
+                return BadRequest("Page number and page size must be greater than zero.");
+            }
+
+            var tables = await _tableService.GetAllTablesAsync(pageNumber, pageSize;
             return Ok(tables);
         }
 
@@ -27,6 +32,7 @@ namespace RestaurantReservation.API.Controllers
             {
                 return NotFound("Invalid Table Id!");
             }
+
             return Ok(table);
         }
 
