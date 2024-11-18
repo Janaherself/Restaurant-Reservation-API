@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using RestaurantReservation.API.DTOs;
 using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db.DataModels;
@@ -24,7 +23,7 @@ namespace RestaurantReservation.API.Services
                 TotalRecords = totalRecords,
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalPages = (int)Math.Ceiling(totalRecords / pageSize)
+                TotalPages = (int)Math.Ceiling((double)totalRecords / pageSize)
             };
         }
 

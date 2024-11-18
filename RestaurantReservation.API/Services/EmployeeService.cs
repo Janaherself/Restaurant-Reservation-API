@@ -23,7 +23,7 @@ namespace RestaurantReservation.API.Services
                 TotalRecords = totalRecords,
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalPages = (int)Math.Ceiling(totalRecords / pageSize)
+                TotalPages = (int)Math.Ceiling((double)totalRecords / pageSize)
             };
         }
 
@@ -34,19 +34,16 @@ namespace RestaurantReservation.API.Services
 
         public async Task CreateEmployeeAsync(Employee employee)
         {
-            // data validation goes here
             await _employeeRepository.CreateAsync(employee);
         }
 
         public async Task UpdateEmployeeAsync(Employee employee)
         {
-            // validation
             await _employeeRepository.UpdateAsync(employee);
         }
 
         public async Task<bool> DeleteEmployeeAsync(int id)
         {
-            // validation
             var employee = await _employeeRepository.GetByIdAsync(id);
             if (employee == null)
             {

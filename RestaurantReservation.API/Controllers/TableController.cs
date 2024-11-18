@@ -20,7 +20,7 @@ namespace RestaurantReservation.API.Controllers
                 return BadRequest("Page number and page size must be greater than zero.");
             }
 
-            var tables = await _tableService.GetAllTablesAsync(pageNumber, pageSize;
+            var tables = await _tableService.GetAllTablesAsync(pageNumber, pageSize);
             return Ok(tables);
         }
 
