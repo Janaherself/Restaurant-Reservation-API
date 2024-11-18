@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Db.DataModels;
 using RestaurantReservation.API.Interfaces;
-using RestaurantReservation.API.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestaurantReservation.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/restaurants")]
     public class RestaurantController(IRestaurantService restaurantService) : Controller

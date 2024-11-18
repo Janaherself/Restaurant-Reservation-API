@@ -3,11 +3,38 @@ using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.API.Services;
 using RestaurantReservation.API.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using RestaurantReservation.API.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new ConfigurationBuilder().SetBasePath(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")))
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
+var secretKey = builder.Configuration["JWTToken:Key"];
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+        .AddJwtBearer(options =>
+        {
+            var key = Encoding.UTF8.GetBytes(secretKey);
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidIssuer = builder.Configuration["JWTToken:Issuer"],
+                ValidAudience = builder.Configuration["JWTToken:Audience"],
+                ClockSkew = TimeSpan.Zero
+            };
+        });
+
+builder.Services.AddSingleton(new JwtTokenGenerator(secretKey));
 
 builder.Services.AddDbContext<RestaurantReservationDbContext>(options => options.UseSqlServer(config.GetConnectionString("RestaurantReservationCore")));
 
@@ -38,10 +65,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
