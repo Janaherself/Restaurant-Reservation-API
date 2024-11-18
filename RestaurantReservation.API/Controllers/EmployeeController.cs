@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Db.DataModels;
 using RestaurantReservation.API.Interfaces;
+using RestaurantReservation.API.Services;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -49,8 +50,13 @@ namespace RestaurantReservation.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteEmployee(int id)
         {
-            await _employeeService.DeleteEmployeeAsync(id);
-            return NoContent();
+            var isDeleted = await _employeeService.DeleteEmployeeAsync(id);
+            if (!isDeleted)
+            {
+                return BadRequest($"Employee with ID {id} does not exist.");
+            }
+
+            return Ok($"Employee with ID {id} has been deleted.");
         }
 
         [HttpGet("managers")]

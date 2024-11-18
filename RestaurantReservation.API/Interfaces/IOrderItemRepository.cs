@@ -5,7 +5,7 @@ namespace RestaurantReservation.API.Interfaces
     public interface IOrderItemRepository
     {
         Task CreateAsync(OrderItem orderItem);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(OrderItem orderItem);
         Task<IEnumerable<OrderItem>> GetAllAsync();
         Task<OrderItem> GetByIdAsync(int id);
         Task UpdateAsync(OrderItem orderItem);

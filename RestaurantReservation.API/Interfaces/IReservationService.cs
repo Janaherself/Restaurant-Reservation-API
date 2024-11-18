@@ -5,7 +5,7 @@ namespace RestaurantReservation.API.Interfaces
     public interface IReservationService
     {
         Task CreateReservationAsync(Reservation reservation);
-        Task DeleteReservationAsync(int id);
+        Task<bool> DeleteReservationAsync(int id);
         Task<IEnumerable<Reservation>> GetAllReservationsAsync();
         Task<Reservation> GetReservationByIdAsync(int id);
         Task UpdateReservationAsync(Reservation reservation);

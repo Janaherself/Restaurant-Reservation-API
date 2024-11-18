@@ -50,8 +50,13 @@ namespace RestaurantReservation.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            await _customerService.DeleteCustomerAsync(id);
-            return NoContent();
+            var isDeleted = await _customerService.DeleteCustomerAsync(id);
+            if (!isDeleted)
+            {
+                return BadRequest($"Customer with ID {id} does not exist.");
+            }
+
+            return Ok($"Customer with ID {id} has been deleted.");
         }
     }
 }

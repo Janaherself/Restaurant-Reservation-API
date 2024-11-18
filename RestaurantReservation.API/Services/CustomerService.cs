@@ -29,10 +29,17 @@ namespace RestaurantReservation.API.Services
             await _customerRepository.UpdateAsync(customer);
         }
 
-        public async Task DeleteCustomerAsync(int id)
+        public async Task<bool> DeleteCustomerAsync(int id)
         {
             // validation
-            await _customerRepository.DeleteAsync(id);
+            var customer = await _customerRepository.GetByIdAsync(id);
+            if (customer == null)
+            {
+                return false;
+            }
+            
+            await _customerRepository.DeleteAsync(customer);
+            return true;
         }
     }
 }

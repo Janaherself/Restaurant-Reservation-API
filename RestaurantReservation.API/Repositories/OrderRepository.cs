@@ -31,14 +31,11 @@ namespace RestaurantReservation.API.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Order order)
         {
-            var order = await GetByIdAsync(id);
-            if (order != null)
-            {
-                _context.Orders.Remove(order);
-                await _context.SaveChangesAsync();
-            }
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
         }
 
         public async Task<decimal> CalculateAverageOrderAmountAsync(int employeeId)

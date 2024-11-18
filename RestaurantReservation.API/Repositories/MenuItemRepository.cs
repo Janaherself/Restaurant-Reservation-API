@@ -31,14 +31,11 @@ namespace RestaurantReservation.API.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(MenuItem menuItem)
         {
-            var menuItem = await GetByIdAsync(id);
-            if (menuItem != null)
-            {
-                _context.MenuItem.Remove(menuItem);
-                await _context.SaveChangesAsync();
-            }
+            _context.MenuItem.Remove(menuItem);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

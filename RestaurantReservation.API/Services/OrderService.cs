@@ -29,10 +29,17 @@ namespace RestaurantReservation.API.Services
             await _orderRepository.UpdateAsync(order);
         }
 
-        public async Task DeleteOrderAsync(int id)
+        public async Task<bool> DeleteOrderAsync(int id)
         {
             // validation
-            await _orderRepository.DeleteAsync(id);
+            var order = await _orderRepository.GetByIdAsync(id);
+            if (order == null)
+            {
+                return false;
+            }
+
+            await _orderRepository.DeleteAsync(order);
+            return true;
         }
 
         public async Task<decimal> CalculateAverageOrderAmountAsync(int employeeId)

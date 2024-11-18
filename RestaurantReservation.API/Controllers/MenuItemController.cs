@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Db.DataModels;
 using RestaurantReservation.API.Interfaces;
+using RestaurantReservation.API.Services;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -50,8 +51,13 @@ namespace RestaurantReservation.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMenuItem(int id)
         {
-            await _menuItemService.DeleteMenuItemAsync(id);
-            return NoContent();
+            var isDeleted = await _menuItemService.DeleteMenuItemAsync(id);
+            if (!isDeleted)
+            {
+                return BadRequest($"MenuItem with ID {id} does not exist.");
+            }
+
+            return Ok($"MenuItem with ID {id} has been deleted.");
         }
     }
 }
