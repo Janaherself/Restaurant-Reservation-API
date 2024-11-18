@@ -6,8 +6,9 @@ namespace RestaurantReservation.API.Interfaces
     {
         Task CreateAsync(Restaurant restaurant);
         Task DeleteAsync(Restaurant restaurant);
-        Task<IEnumerable<Restaurant>> GetAllAsync();
+        Task<IEnumerable<Restaurant>> GetAllAsync(int pageNumber, int pageSize);
         Task<Restaurant> GetByIdAsync(int id);
         Task UpdateAsync(Restaurant restaurant);
+        Task<int> CountAsync();
     }
 }

@@ -1,4 +1,5 @@
-﻿using RestaurantReservation.Db.DataModels;
+﻿using RestaurantReservation.API.DTOs;
+using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Interfaces
 {
@@ -6,7 +7,7 @@ namespace RestaurantReservation.API.Interfaces
     {
         Task CreateRestaurantAsync(Restaurant restaurant);
         Task<bool> DeleteRestaurantAsync(int id);
-        Task<IEnumerable<Restaurant>> GetAllRestaurantsAsync();
+        Task<PaginatedResult<RestaurantReadDto>> GetAllRestaurantsAsync(int pageNumber, int pageSize);
         Task<Restaurant> GetRestaurantByIdAsync(int id);
         Task UpdateRestaurantAsync(Restaurant restaurant);
     }

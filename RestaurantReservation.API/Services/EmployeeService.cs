@@ -1,15 +1,30 @@
-﻿using RestaurantReservation.API.Interfaces;
+﻿using AutoMapper;
+using RestaurantReservation.API.DTOs;
+using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Services
 {
-    public class EmployeeService(IEmployeeRepository EmployeeRepository) : IEmployeeService
+    public class EmployeeService(IEmployeeRepository EmployeeRepository, IMapper mapper) : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository = EmployeeRepository;
+        private readonly IMapper _mapper = mapper;
 
-        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
+        public async Task<PaginatedResult<EmployeeReadDto>> GetAllEmployeesAsync(int pageNumber, int pageSize)
         {
-            return await _employeeRepository.GetAllAsync();
+            var totalRecords = await _employeeRepository.CountAsync();
+            var employees = await _employeeRepository.GetAllAsync(pageNumber, pageSize);
+
+            var employeeDtos = _mapper.Map<List<EmployeeReadDto>>(employees);
+
+            return new PaginatedResult<EmployeeReadDto>
+            {
+                Items = employeeDtos,
+                TotalRecords = totalRecords,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(totalRecords / pageSize)
+            };
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)

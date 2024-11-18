@@ -9,9 +9,12 @@ namespace RestaurantReservation.API.Repositories
     {
         private readonly RestaurantReservationDbContext _context = context;
 
-        public async Task<IEnumerable<OrderItem>> GetAllAsync()
+        public async Task<IEnumerable<OrderItem>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await _context.OrderItems.ToListAsync();
+            return await _context.OrderItems
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
 
         public async Task<OrderItem> GetByIdAsync(int id)
@@ -45,6 +48,11 @@ namespace RestaurantReservation.API.Repositories
                            .Where(oi => oi.Order.ReservationId == reservationId)
                            .Select(oi => oi.MenuItem)
                            .ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.OrderItems.CountAsync();
         }
     }
 }

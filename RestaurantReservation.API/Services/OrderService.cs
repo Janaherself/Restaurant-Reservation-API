@@ -1,15 +1,30 @@
-﻿using RestaurantReservation.API.Interfaces;
+﻿using AutoMapper;
+using RestaurantReservation.API.DTOs;
+using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Services
 {
-    public class OrderService(IOrderRepository OrderRepository) : IOrderService
+    public class OrderService(IOrderRepository OrderRepository, IMapper mapper) : IOrderService
     {
         private readonly IOrderRepository _orderRepository = OrderRepository;
+        private readonly IMapper _mapper = mapper;
 
-        public async Task<IEnumerable<Order>> GetAllOrdersAsync()
+        public async Task<PaginatedResult<OrderReadDto>> GetAllOrdersAsync(int pageNumber, int pageSize)
         {
-            return await _orderRepository.GetAllAsync();
+            var totalRecords = await _orderRepository.CountAsync();
+            var orders = await _orderRepository.GetAllAsync(pageNumber, pageSize);
+
+            var orderDtos = _mapper.Map<List<OrderReadDto>>(orders);
+
+            return new PaginatedResult<OrderReadDto>
+            {
+                Items = orderDtos,
+                TotalRecords = totalRecords,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(totalRecords / pageSize)
+            };
         }
 
         public async Task<Order> GetOrderByIdAsync(int id)

@@ -9,9 +9,12 @@ namespace RestaurantReservation.API.Repositories
     {
         private readonly RestaurantReservationDbContext _context = context;
 
-        public async Task<IEnumerable<Table>> GetAllAsync()
+        public async Task<IEnumerable<Table>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await _context.Tables.ToListAsync();
+            return await _context.Tables
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
 
         public async Task<Table> GetByIdAsync(int id)
@@ -35,6 +38,11 @@ namespace RestaurantReservation.API.Repositories
         {
             _context.Tables.Remove(table);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.Tables.CountAsync();
         }
     }
 }
