@@ -1,4 +1,6 @@
-﻿namespace RestaurantReservation.API.DTOs
+﻿using RestaurantReservation.Db.DataModels;
+
+namespace RestaurantReservation.API.DTOs
 {
     public class OrderReadDto
     {
@@ -7,5 +9,6 @@
         public int? EmployeeId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal TotalAmount { get; set; }
+        public IEnumerable<MenuItemReadDto> MenuItems { get; set; }
     }
 }
