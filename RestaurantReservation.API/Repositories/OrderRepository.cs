@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestaurantReservation.API.DTOs;
 using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.Db;
 using RestaurantReservation.Db.DataModels;
@@ -41,8 +42,14 @@ namespace RestaurantReservation.API.Repositories
 
         }
 
-        public async Task<decimal> CalculateAverageOrderAmountAsync(int employeeId)
+        public async Task<decimal?> CalculateAverageOrderAmountAsync(int employeeId)
         {
+            var employee = await _context.Employees.FindAsync(employeeId);
+            if (employee == null)
+            {
+                return null;
+            }
+
             var orders = await _context.Orders
                                        .Where(o => o.EmployeeId == employeeId)
                                        .ToListAsync();
