@@ -21,7 +21,14 @@ namespace RestaurantReservation.API.Mapping
             CreateMap<MenuItemCreateDto, MenuItem>();
             CreateMap<MenuItemUpdateDto, MenuItem>();
 
-            CreateMap<Order, OrderReadDto>();
+            CreateMap<Order, OrderReadDto>()
+                .ForMember(dest => dest.MenuItems, opt => opt.MapFrom(src => src.OrderItems.Select(oi => new MenuItemReadDto
+                {
+                    MenuItemId = (int)oi.MenuItemId,
+                    Name = oi.MenuItem.Name,
+                    Price = oi.MenuItem.Price
+                })));
+
             CreateMap<OrderCreateDto, Order>();
             CreateMap<OrderUpdateDto, Order>();
 

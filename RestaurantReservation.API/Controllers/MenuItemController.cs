@@ -2,6 +2,7 @@
 using RestaurantReservation.Db.DataModels;
 using RestaurantReservation.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using RestaurantReservation.API.DTOs;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -38,22 +39,22 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateMenuItem(MenuItem menuItem)
+        public async Task<ActionResult> CreateMenuItem(MenuItemCreateDto menuItemCreateDto)
         {
-            await _menuItemService.CreateMenuItemAsync(menuItem);
+            await _menuItemService.CreateMenuItemAsync(menuItemCreateDto);
             return Created();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMenuItem(int id, MenuItem menuItem)
+        public async Task<IActionResult> UpdateMenuItem(int id, MenuItemUpdateDto menuItemUpdateDto)
         {
-            if (id != menuItem.MenuItemId)
+            var isUpdated = await _menuItemService.UpdateMenuItemAsync(id, menuItemUpdateDto);
+            if (!isUpdated)
             {
-                return BadRequest("Invalid Item Id!");
+                return BadRequest($"MenuItem with ID {id} does not exist.");
             }
 
-            await _menuItemService.UpdateMenuItemAsync(menuItem);
-            return NoContent();
+            return Ok($"MenuItem with ID {id} has been updated.");
         }
 
         [HttpDelete("{id}")]

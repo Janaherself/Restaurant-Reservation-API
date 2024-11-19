@@ -2,6 +2,7 @@
 using RestaurantReservation.Db.DataModels;
 using RestaurantReservation.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using RestaurantReservation.API.DTOs;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -38,22 +39,22 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPost("orders")]
-        public async Task<ActionResult> CreateOrder(Order order)
+        public async Task<ActionResult> CreateOrder(OrderCreateDto orderCreateDto)
         {
-            await _orderService.CreateOrderAsync(order);
+            await _orderService.CreateOrderAsync(orderCreateDto);
             return Created();
         }
 
         [HttpPut("orders/{id}")]
-        public async Task<IActionResult> UpdateOrder(int id, Order order)
+        public async Task<IActionResult> UpdateOrder(int id, OrderUpdateDto orderUpdateDto)
         {
-            if (id != order.OrderId)
+            var isUpdated = await _orderService.UpdateOrderAsync(id, orderUpdateDto);
+            if (!isUpdated)
             {
-                return BadRequest("Invalid Order Id!");
+                return BadRequest($"Order with ID {id} does not exist.");
             }
 
-            await _orderService.UpdateOrderAsync(order);
-            return NoContent();
+            return Ok($"Order with ID {id} has been updated.");
         }
 
         [HttpDelete("orders/{id}")]
@@ -72,6 +73,11 @@ namespace RestaurantReservation.API.Controllers
         public async Task<ActionResult<decimal>> GetAverageOrderAmount(int employeeId)
         {
             var orderAmount = await _orderService.CalculateAverageOrderAmountAsync(employeeId);
+            if (orderAmount == null)
+            {
+                return BadRequest($"Employee with ID {employeeId} does not exist.");
+            }
+
             return Ok(orderAmount);
         }
 

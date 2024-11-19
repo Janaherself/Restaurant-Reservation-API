@@ -2,6 +2,7 @@
 using RestaurantReservation.Db.DataModels;
 using RestaurantReservation.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using RestaurantReservation.API.DTOs;
 
 namespace RestaurantReservation.API.Controllers
 {
@@ -37,22 +38,22 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateCustomer(Customer customer)
+        public async Task<ActionResult> CreateCustomer(CustomerCreateDto customerCreateDto)
         {
-            await _customerService.CreateCustomerAsync(customer);
+            await _customerService.CreateCustomerAsync(customerCreateDto);
             return Created();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCustomer(int id, Customer customer)
+        public async Task<IActionResult> UpdateCustomer(int id, CustomerUpdateDto customerUpdateDto)
         {
-            if (id != customer.CustomerId)
+            var isUpdated = await _customerService.UpdateCustomerAsync(id, customerUpdateDto);
+            if (!isUpdated)
             {
-                return BadRequest("Invalid Customer Id!");
+                return BadRequest($"Customer with ID {id} does not exist.");
             }
 
-            await _customerService.UpdateCustomerAsync(customer);
-            return NoContent();
+            return Ok($"Customer with ID {id} has been updated.");
         }
 
         [HttpDelete("{id}")]
