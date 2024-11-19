@@ -32,14 +32,23 @@ namespace RestaurantReservation.API.Services
             return await _tableRepository.GetByIdAsync(id);
         }
 
-        public async Task CreateTableAsync(Table table)
+        public async Task CreateTableAsync(TableCreateDto tableCreateDto)
         {
+            var table = _mapper.Map<Table>(tableCreateDto);
             await _tableRepository.CreateAsync(table);
         }
 
-        public async Task UpdateTableAsync(Table table)
+        public async Task<bool> UpdateTableAsync(int id, TableUpdateDto tableUpdateDto)
         {
+            var table = await _tableRepository.GetByIdAsync(id);
+            if (table == null)
+            {
+                return false;
+            }
+
+            _mapper.Map(tableUpdateDto, table);
             await _tableRepository.UpdateAsync(table);
+            return true;
         }
 
         public async Task<bool> DeleteTableAsync(int id)

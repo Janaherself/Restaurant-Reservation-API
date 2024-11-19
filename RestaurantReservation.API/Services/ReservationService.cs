@@ -32,14 +32,23 @@ namespace RestaurantReservation.API.Services
             return await _reservationRepository.GetByIdAsync(id);
         }
 
-        public async Task CreateReservationAsync(Reservation reservation)
+        public async Task CreateReservationAsync(ReservationCreateDto reservationCreateDto)
         {
+            var reservation = _mapper.Map<Reservation>(reservationCreateDto);
             await _reservationRepository.CreateAsync(reservation);
         }
 
-        public async Task UpdateReservationAsync(Reservation reservation)
+        public async Task<bool> UpdateReservationAsync(int id, ReservationUpdateDto reservationUpdateDto)
         {
+            var reservation = await _reservationRepository.GetByIdAsync(id);
+            if (reservation == null)
+            {
+                return false;
+            }
+
+            _mapper.Map(reservationUpdateDto, reservation);
             await _reservationRepository.UpdateAsync(reservation);
+            return true;
         }
 
         public async Task<bool> DeleteReservationAsync(int id)
@@ -54,14 +63,16 @@ namespace RestaurantReservation.API.Services
             return true;
         }
 
-        public async Task<IEnumerable<Reservation>>? GetReservationsByCustomerAsync(int customerId)
+        public async Task<IEnumerable<ReservationReadDto>> GetReservationsByCustomerAsync(int customerId)
         {
             var reservations = await _reservationRepository.GetReservationsByCustomerAsync(customerId);
             if (!reservations.Any())
             {
                 return null;
             }
-            return reservations;
+
+            var reservationsList = _mapper.Map<IEnumerable<ReservationReadDto>>(reservations);
+            return reservationsList;
         }
 
         public async Task<IEnumerable<ReservationView>> ListReservationViewAsync()
