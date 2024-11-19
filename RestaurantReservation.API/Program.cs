@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using RestaurantReservation.API.Authorization;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using RestaurantReservation.API.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new ConfigurationBuilder().SetBasePath(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")))
@@ -35,6 +38,9 @@ builder.Services.AddAuthentication(options =>
         });
 
 builder.Services.AddSingleton(new JwtTokenGenerator(secretKey));
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CustomerUpdateDtoValidator>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
