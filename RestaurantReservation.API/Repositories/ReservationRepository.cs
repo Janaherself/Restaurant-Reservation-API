@@ -46,7 +46,6 @@ namespace RestaurantReservation.API.Repositories
             return await _context.Reservations
                            .Include(r => r.Customer)
                            .Include(r => r.Restaurant)
-                           .Include(r => r.ReservationDate)
                            .Where(r => r.CustomerId == customerId)
                            .ToListAsync();
         }
