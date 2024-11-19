@@ -1,4 +1,5 @@
-﻿using RestaurantReservation.Db.DataModels;
+﻿using RestaurantReservation.API.DTOs;
+using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Interfaces
 {
@@ -9,7 +10,7 @@ namespace RestaurantReservation.API.Interfaces
         Task<IEnumerable<Order>> GetAllAsync(int pageNumber, int pageSize);
         Task<Order> GetByIdAsync(int id);
         Task UpdateAsync(Order order);
-        Task<decimal> CalculateAverageOrderAmountAsync(int employeeId);
+        Task<decimal?> CalculateAverageOrderAmountAsync(int employeeId);
         Task<IEnumerable<Order>> ListOrdersAndMenuItemsAsync(int reservationId);
         Task<int> CountAsync();
     }

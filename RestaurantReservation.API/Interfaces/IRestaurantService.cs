@@ -5,10 +5,10 @@ namespace RestaurantReservation.API.Interfaces
 {
     public interface IRestaurantService
     {
-        Task CreateRestaurantAsync(Restaurant restaurant);
+        Task CreateRestaurantAsync(RestaurantCreateDto restaurantCreateDto);
         Task<bool> DeleteRestaurantAsync(int id);
         Task<PaginatedResult<RestaurantReadDto>> GetAllRestaurantsAsync(int pageNumber, int pageSize);
         Task<Restaurant> GetRestaurantByIdAsync(int id);
-        Task UpdateRestaurantAsync(Restaurant restaurant);
+        Task<bool> UpdateRestaurantAsync(int id, RestaurantUpdateDto restaurantUpdateDto);
     }
 }

@@ -5,10 +5,10 @@ namespace RestaurantReservation.API.Interfaces
 {
     public interface IMenuItemService
     {
-        Task CreateMenuItemAsync(MenuItem menuItem);
+        Task CreateMenuItemAsync(MenuItemCreateDto menuItemCreateDto);
         Task<bool> DeleteMenuItemAsync(int id);
         Task<PaginatedResult<MenuItemReadDto>> GetAllMenuItemsAsync(int pageNumber, int pageSize);
         Task<MenuItem> GetMenuItemByIdAsync(int id);
-        Task UpdateMenuItemAsync(MenuItem menuItem);
+        Task<bool> UpdateMenuItemAsync(int id, MenuItemUpdateDto menuItemUpdateDto);
     }
 }
