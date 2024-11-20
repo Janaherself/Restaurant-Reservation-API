@@ -20,7 +20,7 @@ namespace RestaurantReservation.API.Validation
                 .GreaterThan(DateTime.Now).WithMessage("Reservation date must be in the future.");
 
             RuleFor(x => x.PartySize)
-                .GreaterThan(0).WithMessage("Party size must be in the future.");
+                .GreaterThan(0).WithMessage("Party size must be greater than zero.");
         }
     }
 }
