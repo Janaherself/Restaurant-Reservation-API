@@ -20,8 +20,6 @@
   </li>
 </ul>
 
-<br>
-
 ### Additional Features
 <ul>
   <li><strong>User Input Validation</strong>: Ensures only valid data is processed, with meaningful error messages for invalid inputs.</li>
@@ -40,6 +38,7 @@
   <li><strong>Error Handling</strong>: Centralized and user-friendly error messages</li>
   <li><strong>Validation</strong>: FluentValidation for robust input checks</li>
   <li><strong>Object Mappings</strong>: AutoMapper for mapping DTO objects to database entities</li>
+  <li><strong>Testing</strong>: Postman for testing requests to the API endpoints</li>
 </ul>
 
 <br>
