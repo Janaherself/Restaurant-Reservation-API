@@ -30,8 +30,8 @@ builder.Services.AddAuthentication(options =>
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = true,
-                ValidateAudience = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
                 ValidIssuer = builder.Configuration["JWTToken:Issuer"],
                 ValidAudience = builder.Configuration["JWTToken:Audience"],
                 ClockSkew = TimeSpan.Zero
