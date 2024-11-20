@@ -1,0 +1,1220 @@
+{
+	"info": {
+		"_postman_id": "144f54a1-fb58-4e85-9dd5-fdf3a953826c",
+		"name": "Restaurant Reservation API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39584255"
+	},
+	"item": [
+		{
+			"name": "log in",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"guest\",\r\n  \"password\": \"guest\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "log in",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"guest\",\r\n  \"password\": \"guest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7138/api/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:10:14 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "invalid log in",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "invalid log in",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7138/api/customers/12",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"customers",
+								"12"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:11:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "WWW-Authenticate",
+							"value": "Bearer"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "an authorized resource with no token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "an authorized resource with no token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7138/api/reservations/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"reservations",
+								"3"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:11:48 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "WWW-Authenticate",
+							"value": "Bearer"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "the second page of customers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/customers?pageNumber=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "the second page of customers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/customers?pageNumber=2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:10:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"items\": [\n        {\n            \"customerId\": 13,\n            \"firstName\": \"Jana\",\n            \"lastName\": \"Abusaa\",\n            \"email\": \"jana@gmail.com\",\n            \"phoneNumber\": \"0011223345\"\n        },\n        {\n            \"customerId\": 14,\n            \"firstName\": \"Jana\",\n            \"lastName\": \"Abusaa\",\n            \"email\": \"jana@gmail.com\",\n            \"phoneNumber\": \"0011223345\"\n        },\n        {\n            \"customerId\": 15,\n            \"firstName\": \"Jana\",\n            \"lastName\": \"Abusaa\",\n            \"email\": \"jana@gmail.com\",\n            \"phoneNumber\": \"0011223345\"\n        },\n        {\n            \"customerId\": 1013,\n            \"firstName\": \"jane\",\n            \"lastName\": \"doe\",\n            \"email\": \"jane@doe.com\",\n            \"phoneNumber\": \"123456789\"\n        },\n        {\n            \"customerId\": 1014,\n            \"firstName\": \"john\",\n            \"lastName\": \"doe\",\n            \"email\": \"john@doe.com\",\n            \"phoneNumber\": \"123456789\"\n        }\n    ],\n    \"totalRecords\": 15,\n    \"pageNumber\": 2,\n    \"pageSize\": 10,\n    \"totalPages\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "a non existing employee",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/employees/20",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"employees",
+						"20"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "a non existing employee",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/employees/20",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"employees",
+								"20"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:12:25 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "\"Employee with ID 20 does not exist.\""
+				}
+			]
+		},
+		{
+			"name": "an existing customer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/customers/12",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers",
+						"12"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "an existing customer",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/customers/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"customers",
+								"13"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:13:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "\"Customer with ID 13 has been deleted.\""
+				}
+			]
+		},
+		{
+			"name": "a customer with valid data format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"john\",\r\n  \"lastName\": \"doe\",\r\n  \"email\": \"john@doe.com\",\r\n  \"phoneNumber\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "a customer with valid data format",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"jake\",\r\n  \"lastName\": \"doe\",\r\n  \"email\": \"jake@doe.com\",\r\n  \"phoneNumber\": \"1234567890\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7138/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:16:32 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "a customer with invalid data format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"doe\",\r\n  \"email\": \"invalid email format\",\r\n  \"phoneNumber\": \"invalid phone number format\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "a customer with invalid data format",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"doe\",\r\n  \"email\": \"invalid email format\",\r\n  \"phoneNumber\": \"invalid phone number format\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7138/api/customers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:17:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n    \"title\": \"One or more validation errors occurred.\",\n    \"status\": 400,\n    \"errors\": {\n        \"Email\": [\n            \"Invalid email format.\"\n        ],\n        \"FirstName\": [\n            \"First name is required.\"\n        ],\n        \"PhoneNumber\": [\n            \"Invalid phone number format.\"\n        ]\n    },\n    \"traceId\": \"00-c6b3f25e56cbcae718e2a60fb6c4f476-4f6a63e57f229889-00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "a reservation with valid details",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerId\": 10,\r\n  \"restaurantId\": 5,\r\n  \"tableId\": 4,\r\n  \"reservationDate\": \"2024-11-22T13:01:48.655Z\",\r\n  \"partySize\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "a reservation with valid details",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 10,\r\n  \"restaurantId\": 5,\r\n  \"tableId\": 4,\r\n  \"reservationDate\": \"2024-11-22T13:01:48.655Z\",\r\n  \"partySize\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7138/api/reservations/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"reservations",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:17:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "\"Reservation with ID 3 has been updated.\""
+				}
+			]
+		},
+		{
+			"name": "a menu item with invalid details",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"restaurantId\": 3,\r\n  \"description\": \"Very juicy beef burger with cheese\",\r\n  \"price\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/menu-items/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"menu-items",
+						"4"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "a menu item with invalid details",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"restaurantId\": 3,\r\n  \"description\": \"Very juicy beef burger with cheese\",\r\n  \"price\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7138/api/menu-items/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"menu-items",
+								"4"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:18:48 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n    \"title\": \"One or more validation errors occurred.\",\n    \"status\": 400,\n    \"errors\": {\n        \"Name\": [\n            \"The Name field is required.\"\n        ],\n        \"Price\": [\n            \"Price must be greater than zero.\"\n        ]\n    },\n    \"traceId\": \"00-3896493eadf31acd5049e4c70e1eeafb-751bd00dffa11811-00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "all managers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/employees/managers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"employees",
+						"managers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "all managers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/employees/managers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"employees",
+								"managers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:19:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"employeeId\": 1,\n        \"restaurantId\": 1,\n        \"firstName\": \"Chris\",\n        \"lastName\": \"Evans\",\n        \"position\": \"Manager\",\n        \"restaurant\": null,\n        \"orders\": []\n    },\n    {\n        \"employeeId\": 4,\n        \"restaurantId\": 3,\n        \"firstName\": \"Sophie\",\n        \"lastName\": \"Turner\",\n        \"position\": \"Manager\",\n        \"restaurant\": null,\n        \"orders\": []\n    },\n    {\n        \"employeeId\": 8,\n        \"restaurantId\": 5,\n        \"firstName\": \"Ben\",\n        \"lastName\": \"Azelart\",\n        \"position\": \"Manager\",\n        \"restaurant\": null,\n        \"orders\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "the average amount of orders served by an employee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/employees/5/average-order-amount",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"employees",
+						"5",
+						"average-order-amount"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "the average amount of orders served by an employee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/employees/5/average-order-amount",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"employees",
+								"5",
+								"average-order-amount"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:19:29 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "9"
+				}
+			]
+		},
+		{
+			"name": "all orders and menu items in each order of a reservation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/5/orders",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"5",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "all orders and menu items in each order of a reservation",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/reservations/5/orders",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"reservations",
+								"5",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:19:56 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"orderId\": 5,\n        \"reservationId\": 5,\n        \"employeeId\": 4,\n        \"orderDate\": \"2024-10-19T05:19:54.9429586\",\n        \"totalAmount\": 4,\n        \"menuItems\": [\n            {\n                \"menuItemId\": 2,\n                \"restaurantId\": null,\n                \"name\": \"Caesar Salad\",\n                \"description\": null,\n                \"price\": 8.99\n            },\n            {\n                \"menuItemId\": 3,\n                \"restaurantId\": null,\n                \"name\": \"Pancake Stack\",\n                \"description\": null,\n                \"price\": 7.5\n            }\n        ]\n    },\n    {\n        \"orderId\": 6,\n        \"reservationId\": 5,\n        \"employeeId\": 7,\n        \"orderDate\": \"2024-10-19T05:19:54.942959\",\n        \"totalAmount\": 21,\n        \"menuItems\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "all ordered menu items of a reservation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/5/menu-items",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"5",
+						"menu-items"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "all ordered menu items of a reservation",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/reservations/5/menu-items",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"reservations",
+								"5",
+								"menu-items"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:20:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"menuItemId\": 2,\n        \"restaurantId\": 1,\n        \"name\": \"Caesar Salad\",\n        \"description\": \"Classic Caesar salad with a twist\",\n        \"price\": 8.99,\n        \"restaurant\": null,\n        \"orderItems\": []\n    },\n    {\n        \"menuItemId\": 3,\n        \"restaurantId\": 2,\n        \"name\": \"Pancake Stack\",\n        \"description\": \"Fluffy pancakes with maple syrup\",\n        \"price\": 7.5,\n        \"restaurant\": null,\n        \"orderItems\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "all reservations of a customer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/customer/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"customer",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "all reservations of a customer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTExODE1LCJleHAiOjE3MzIxMTU0MTUsImlhdCI6MTczMjExMTgxNX0.jAVNlsNs7lBEUh6JJryBXbSHhDPSGvNemNBwV1r8esg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7138/api/reservations/customer/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"reservations",
+								"customer",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Nov 2024 14:20:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"reservationId\": 1,\n        \"customerId\": 1,\n        \"restaurantId\": 1,\n        \"tableId\": 1,\n        \"reservationDate\": \"2024-10-20T05:19:54.9429464\",\n        \"partySize\": 4\n    },\n    {\n        \"reservationId\": 6,\n        \"customerId\": 1,\n        \"restaurantId\": 6,\n        \"tableId\": 13,\n        \"reservationDate\": \"2024-10-25T05:19:54.942953\",\n        \"partySize\": 3\n    }\n]"
+				}
+			]
+		}
+	]
+}

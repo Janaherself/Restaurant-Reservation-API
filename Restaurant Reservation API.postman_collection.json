@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "144f54a1-fb58-4e85-9dd5-fdf3a953826c",
+		"name": "Restaurant Reservation API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39584255"
+	},
+	"item": [
+		{
+			"name": "log in",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "invalid log in",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "an authorized resource with no token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "the second page of customers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/customers?pageNumber=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "a non existing employee",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/employees/20",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"employees",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "an existing customer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/customers/12",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "a customer with valid data format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"john\",\r\n  \"lastName\": \"doe\",\r\n  \"email\": \"john@doe.com\",\r\n  \"phoneNumber\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "a customer with invalid data format",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"doe\",\r\n  \"email\": \"invalid email format\",\r\n  \"phoneNumber\": \"invalid phone number format\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "a reservation with valid details",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerId\": 10,\r\n  \"restaurantId\": 5,\r\n  \"tableId\": 4,\r\n  \"reservationDate\": \"2024-11-22T13:01:48.655Z\",\r\n  \"partySize\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "a menu item with invalid details",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"restaurantId\": 3,\r\n  \"description\": \"Very juicy beef burger with cheese\",\r\n  \"price\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7138/api/menu-items/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"menu-items",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all managers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/employees/5/average-order-amount",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"employees",
+						"5",
+						"average-order-amount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "the average amount of orders served by an employee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/employees/5/average-order-amount",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"employees",
+						"5",
+						"average-order-amount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all orders and menu items in each order of a reservation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/5/orders",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"5",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all ordered menu items of a reservation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/5/menu-items",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"5",
+						"menu-items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all reservations of a customer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Imd1ZXN0IiwibmJmIjoxNzMyMTA2MzE3LCJleHAiOjE3MzIxMDk5MTcsImlhdCI6MTczMjEwNjMxN30.-3eQFO53F3xgfBNKtxNEZPmbJWI2UE2v_0Qtf2315lI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7138/api/reservations/customer/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7138",
+					"path": [
+						"api",
+						"reservations",
+						"customer",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
