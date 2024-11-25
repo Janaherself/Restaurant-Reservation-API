@@ -1,17 +1,17 @@
 using RestaurantReservation.Db;
-using RestaurantReservation.API.Services;
-using RestaurantReservation.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using RestaurantReservation.API.Authorization;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using RestaurantReservation.API.Validation;
 using Microsoft.OpenApi.Models;
-using RestaurantReservation.API.RepositoriesInterfaces;
-using RestaurantReservation.API.ServicesInterfaces;
+using RestaurantReservation.API.BusinessLogic.Services;
+using RestaurantReservation.API.BusinessLogic.ServicesInterfaces;
+using RestaurantReservation.API.DataAccess.Repositories;
+using RestaurantReservation.API.DataAccess.RepositoriesInterfaces;
+using RestaurantReservation.API.BusinessLogic.Authorization;
+using RestaurantReservation.API.BusinessLogic.DataValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new ConfigurationBuilder().SetBasePath(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")))
