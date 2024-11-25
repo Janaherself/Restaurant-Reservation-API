@@ -1,6 +1,6 @@
 ﻿using RestaurantReservation.Db.DataModels;
 
-namespace RestaurantReservation.API.Interfaces
+namespace RestaurantReservation.API.RepositoriesInterfaces
 {
     public interface IEmployeeRepository
     {

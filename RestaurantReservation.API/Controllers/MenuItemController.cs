@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Db.DataModels;
-using RestaurantReservation.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using RestaurantReservation.API.DTOs;
+using RestaurantReservation.API.ServicesInterfaces;
 
 namespace RestaurantReservation.API.Controllers
 {

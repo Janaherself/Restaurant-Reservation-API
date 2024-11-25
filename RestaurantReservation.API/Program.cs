@@ -1,5 +1,4 @@
 using RestaurantReservation.Db;
-using RestaurantReservation.API.Interfaces;
 using RestaurantReservation.API.Services;
 using RestaurantReservation.API.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +10,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using RestaurantReservation.API.Validation;
 using Microsoft.OpenApi.Models;
+using RestaurantReservation.API.RepositoriesInterfaces;
+using RestaurantReservation.API.ServicesInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = new ConfigurationBuilder().SetBasePath(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")))

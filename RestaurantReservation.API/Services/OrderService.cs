@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RestaurantReservation.API.DTOs;
-using RestaurantReservation.API.Interfaces;
+using RestaurantReservation.API.RepositoriesInterfaces;
+using RestaurantReservation.API.ServicesInterfaces;
 using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.Services

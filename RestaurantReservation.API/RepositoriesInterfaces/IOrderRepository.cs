@@ -1,7 +1,7 @@
 ﻿using RestaurantReservation.API.DTOs;
 using RestaurantReservation.Db.DataModels;
 
-namespace RestaurantReservation.API.Interfaces
+namespace RestaurantReservation.API.RepositoriesInterfaces
 {
     public interface IOrderRepository
     {

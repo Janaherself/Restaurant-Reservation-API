@@ -1,7 +1,7 @@
 ﻿using RestaurantReservation.API.DTOs;
 using RestaurantReservation.Db.DataModels;
 
-namespace RestaurantReservation.API.Interfaces
+namespace RestaurantReservation.API.ServicesInterfaces
 {
     public interface IOrderItemService
     {
@@ -10,5 +10,6 @@ namespace RestaurantReservation.API.Interfaces
         Task<PaginatedResult<OrderItemReadDto>> GetAllOrderItemsAsync(int pageNumber, int pageSize);
         Task<OrderItem> GetOrderItemByIdAsync(int id);
         Task<bool> UpdateOrderItemAsync(int id, OrderItemUpdateDto orderItemUpdateDto);
-        Task<IEnumerable<MenuItem>>? ListOrderedMenuItemsAsync(int reservationId);    }
+        Task<IEnumerable<MenuItem>>? ListOrderedMenuItemsAsync(int reservationId);
+    }
 }
