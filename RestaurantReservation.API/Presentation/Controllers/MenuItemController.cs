@@ -9,16 +9,13 @@ namespace RestaurantReservation.API.Presentation.Controllers
     /// <summary>
     /// handles all operations related to menu items.
     /// </summary>
-    /// <param name="menuItemService"></param>
+    /// <param name="_menuItemService"></param>
     [Authorize]
     [ApiController]
     [Route("api/menu-items")]
     [Produces("application/json")]
-    public class MenuItemController(IMenuItemService menuItemService) : Controller
+    public class MenuItemController(IMenuItemService _menuItemService) : Controller
     {
-        private readonly IMenuItemService _menuItemService = menuItemService;
-
-
         /// <summary>
         /// gets a list of all menu items
         /// </summary>

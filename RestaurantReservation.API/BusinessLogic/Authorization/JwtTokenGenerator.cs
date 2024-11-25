@@ -5,10 +5,8 @@ using System.Text;
 
 namespace RestaurantReservation.API.BusinessLogic.Authorization
 {
-    public class JwtTokenGenerator(string secretKey) : IJwtTokenGenerator
+    public class JwtTokenGenerator(string _secretKey) : IJwtTokenGenerator
     {
-        private readonly string _secretKey = secretKey;
-
         public string GenerateToken(string username)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

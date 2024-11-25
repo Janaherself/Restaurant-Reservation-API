@@ -9,15 +9,13 @@ namespace RestaurantReservation.API.Presentation.Controllers
     /// <summary>
     /// handles all operations related to employees.
     /// </summary>
-    /// <param name="employeeService"></param>
+    /// <param name="_employeeService"></param>
     [Authorize]
     [ApiController]
     [Route("api/employees")]
     [Produces("application/json")]
-    public class EmployeeController(IEmployeeService employeeService) : Controller
+    public class EmployeeController(IEmployeeService _employeeService) : Controller
     {
-        private readonly IEmployeeService _employeeService = employeeService;
-
         /// <summary>
         /// gets a list of all employees
         /// </summary>

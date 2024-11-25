@@ -6,13 +6,11 @@ namespace RestaurantReservation.API.Presentation.Controllers
     /// <summary>
     /// handles user login
     /// </summary>
-    /// <param name="tokenGenerator"></param>
+    /// <param name="_tokenGenerator"></param>
     [ApiController]
     [Route("api/login")]
-    public class LoginController(JwtTokenGenerator tokenGenerator) : Controller
+    public class LoginController(JwtTokenGenerator _tokenGenerator) : Controller
     {
-        private readonly JwtTokenGenerator _tokenGenerator = tokenGenerator;
-
         /// <summary>
         /// authenticates a user
         /// </summary>

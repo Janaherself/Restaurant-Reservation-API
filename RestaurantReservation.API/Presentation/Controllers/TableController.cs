@@ -9,15 +9,13 @@ namespace RestaurantReservation.API.Presentation.Controllers
     /// <summary>
     /// handles all operations related to tables.
     /// </summary>
-    /// <param name="tableService"></param>
+    /// <param name="_tableService"></param>
     [Authorize]
     [ApiController]
     [Route("api/tables")]
     [Produces("application/json")]
-    public class TableController(ITableService tableService) : Controller
+    public class TableController(ITableService _tableService) : Controller
     {
-        private readonly ITableService _tableService = tableService;
-
         /// <summary>
         /// gets a list of all tables 
         /// </summary>

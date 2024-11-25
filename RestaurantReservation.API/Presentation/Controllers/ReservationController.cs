@@ -9,15 +9,13 @@ namespace RestaurantReservation.API.Presentation.Controllers
     /// <summary>
     /// handles all operations related to reservations.
     /// </summary>
-    /// <param name="reservationService"></param>
+    /// <param name="_reservationService"></param>
     [Authorize]
     [ApiController]
     [Route("api/reservations")]
     [Produces("application/json")]
-    public class ReservationController(IReservationService reservationService) : Controller
+    public class ReservationController(IReservationService _reservationService) : Controller
     {
-        private readonly IReservationService _reservationService = reservationService;
-
         /// <summary>
         /// gets a list of all reservations
         /// </summary>

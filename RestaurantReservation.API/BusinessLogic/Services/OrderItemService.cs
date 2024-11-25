@@ -6,11 +6,8 @@ using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.BusinessLogic.Services
 {
-    public class OrderItemService(IOrderItemRepository OrderItemRepository, IMapper mapper) : IOrderItemService
+    public class OrderItemService(IOrderItemRepository _orderItemRepository, IMapper _mapper) : IOrderItemService
     {
-        private readonly IOrderItemRepository _orderItemRepository = OrderItemRepository;
-        private readonly IMapper _mapper = mapper;
-
         public async Task<PaginatedResult<OrderItemReadDto>> GetAllOrderItemsAsync(int pageNumber, int pageSize)
         {
             var totalRecords = await _orderItemRepository.CountAsync();

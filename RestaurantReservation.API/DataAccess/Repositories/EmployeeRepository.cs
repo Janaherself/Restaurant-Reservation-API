@@ -5,10 +5,8 @@ using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.DataAccess.Repositories
 {
-    public class EmployeeRepository(RestaurantReservationDbContext context) : IEmployeeRepository
+    public class EmployeeRepository(RestaurantReservationDbContext _context) : IEmployeeRepository
     {
-        private readonly RestaurantReservationDbContext _context = context;
-
         public async Task<IEnumerable<Employee>> GetAllAsync(int pageNumber, int pageSize)
         {
             return await _context.Employees
