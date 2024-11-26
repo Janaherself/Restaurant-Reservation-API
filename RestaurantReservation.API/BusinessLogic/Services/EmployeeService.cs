@@ -13,7 +13,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             var totalRecords = await _employeeRepository.CountAsync();
             var employees = await _employeeRepository.GetAllAsync(pageNumber, pageSize);
 
-            var employeeDtos = _mapper.Map<List<EmployeeReadDto>>(employees);
+            var employeeDtos = _mapper.Map<IEnumerable<EmployeeReadDto>>(employees);
 
             return new PaginatedResult<EmployeeReadDto>
             {
@@ -25,9 +25,9 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             };
         }
 
-        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        public async Task<EmployeeReadDto> GetEmployeeByIdAsync(int id)
         {
-            return await _employeeRepository.GetByIdAsync(id);
+            return _mapper.Map<EmployeeReadDto>(await _employeeRepository.GetByIdAsync(id));
         }
 
         public async Task CreateEmployeeAsync(EmployeeCreateDto employeeCreateDto)
@@ -61,9 +61,9 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             return true;
         }
 
-        public async Task<IEnumerable<Employee>> GetMnagersAsync()
+        public async Task<IEnumerable<EmployeeReadDto>> GetMnagersAsync()
         {
-            return await _employeeRepository.ListManagersAsync();
+            return _mapper.Map<IEnumerable<EmployeeReadDto>>(await _employeeRepository.ListManagersAsync());
         }
     }
 }

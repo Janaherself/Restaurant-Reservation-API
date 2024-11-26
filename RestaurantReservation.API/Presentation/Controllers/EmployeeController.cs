@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestaurantReservation.Db.DataModels;
 using Microsoft.AspNetCore.Authorization;
 using RestaurantReservation.API.BusinessLogic.DTOs;
 using RestaurantReservation.API.BusinessLogic.ServicesInterfaces;
@@ -25,7 +24,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<EmployeeReadDto>>> GetEmployees([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             if (pageNumber <= 0 || pageSize <= 0)
             {
@@ -45,7 +44,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        public async Task<ActionResult<EmployeeReadDto>> GetEmployee(int id)
         {
             var employee = await _employeeService.GetEmployeeByIdAsync(id);
             if (employee == null)
@@ -118,7 +117,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [HttpGet("managers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetMangers()
+        public async Task<ActionResult<IEnumerable<EmployeeReadDto>>> GetMangers()
         {
             var managers = await _employeeService.GetMnagersAsync();
             return Ok(managers);

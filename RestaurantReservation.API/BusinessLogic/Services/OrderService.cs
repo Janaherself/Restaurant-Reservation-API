@@ -13,7 +13,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             var totalRecords = await _orderRepository.CountAsync();
             var orders = await _orderRepository.GetAllAsync(pageNumber, pageSize);
 
-            var orderDtos = _mapper.Map<List<OrderReadDto>>(orders);
+            var orderDtos = _mapper.Map<IEnumerable<OrderReadDto>>(orders);
 
             return new PaginatedResult<OrderReadDto>
             {
@@ -25,9 +25,9 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             };
         }
 
-        public async Task<Order> GetOrderByIdAsync(int id)
+        public async Task<OrderReadDto> GetOrderByIdAsync(int id)
         {
-            return await _orderRepository.GetByIdAsync(id);
+            return _mapper.Map<OrderReadDto>(await _orderRepository.GetByIdAsync(id));
         }
 
         public async Task CreateOrderAsync(OrderCreateDto orderCreateDto)
@@ -66,7 +66,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             return await _orderRepository.CalculateAverageOrderAmountAsync(employeeId);
         }
 
-        public async Task<IEnumerable<OrderReadDto>> ListOrdersAndMenuItemsAsync(int reservationId)
+        public async Task<IEnumerable<OrderReadDto>?> ListOrdersAndMenuItemsAsync(int reservationId)
         {
             var orders = await _orderRepository.ListOrdersAndMenuItemsAsync(reservationId);
             if (!orders.Any())
@@ -74,8 +74,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
                 return null;
             }
 
-            var ordersList = _mapper.Map<IEnumerable<OrderReadDto>>(orders);
-            return ordersList;
+            return _mapper.Map<IEnumerable<OrderReadDto>>(orders);
         }
     }
 }

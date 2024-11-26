@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestaurantReservation.Db.DataModels;
 using Microsoft.AspNetCore.Authorization;
 using RestaurantReservation.API.BusinessLogic.DTOs;
 using RestaurantReservation.API.BusinessLogic.ServicesInterfaces;
@@ -26,7 +25,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<CustomerReadDto>>> GetCustomers([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             if (pageNumber <= 0 || pageSize <= 0)
             {
@@ -46,7 +45,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<CustomerReadDto>> GetCustomer(int id)
         {
             var customer = await _customerService.GetCustomerByIdAsync(id);
             if (customer == null)

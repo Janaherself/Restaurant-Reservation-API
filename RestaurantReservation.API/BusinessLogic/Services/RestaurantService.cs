@@ -13,7 +13,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             var totalRecords = await _restaurantRepository.CountAsync();
             var restaurants = await _restaurantRepository.GetAllAsync(pageNumber, pageSize);
 
-            var restaurantDtos = _mapper.Map<List<RestaurantReadDto>>(restaurants);
+            var restaurantDtos = _mapper.Map<IEnumerable<RestaurantReadDto>>(restaurants);
 
             return new PaginatedResult<RestaurantReadDto>
             {
@@ -25,9 +25,9 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             };
         }
 
-        public async Task<Restaurant> GetRestaurantByIdAsync(int id)
+        public async Task<RestaurantReadDto> GetRestaurantByIdAsync(int id)
         {
-            return await _restaurantRepository.GetByIdAsync(id);
+            return _mapper.Map<RestaurantReadDto>(await _restaurantRepository.GetByIdAsync(id));
         }
 
         public async Task CreateRestaurantAsync(RestaurantCreateDto restaurantCreateDto)

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestaurantReservation.Db.DataModels;
 using Microsoft.AspNetCore.Authorization;
 using RestaurantReservation.API.BusinessLogic.DTOs;
 using RestaurantReservation.API.BusinessLogic.ServicesInterfaces;
@@ -26,7 +25,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<IEnumerable<ReservationReadDto>>> GetReservations([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             if (pageNumber <= 0 || pageSize <= 0)
             {
@@ -46,7 +45,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<Reservation>> GetReservation(int id)
+        public async Task<ActionResult<ReservationReadDto>> GetReservation(int id)
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
             if (reservation == null)
@@ -121,7 +120,7 @@ namespace RestaurantReservation.API.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservationsOfCustomer(int customerId)
+        public async Task<ActionResult<IEnumerable<ReservationReadDto>>> GetReservationsOfCustomer(int customerId)
         {
             var reservations = await _reservationService.GetReservationsByCustomerAsync(customerId);
             if (reservations == null)

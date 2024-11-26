@@ -13,7 +13,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             var totalRecords = await _reservationRepository.CountAsync();
             var reservations = await _reservationRepository.GetAllAsync(pageNumber, pageSize);
 
-            var reservationDtos = _mapper.Map<List<ReservationReadDto>>(reservations);
+            var reservationDtos = _mapper.Map<IEnumerable<ReservationReadDto>>(reservations);
 
             return new PaginatedResult<ReservationReadDto>
             {
@@ -25,9 +25,9 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             };
         }
 
-        public async Task<Reservation> GetReservationByIdAsync(int id)
+        public async Task<ReservationReadDto> GetReservationByIdAsync(int id)
         {
-            return await _reservationRepository.GetByIdAsync(id);
+            return _mapper.Map<ReservationReadDto>(await _reservationRepository.GetByIdAsync(id));
         }
 
         public async Task CreateReservationAsync(ReservationCreateDto reservationCreateDto)
@@ -61,7 +61,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
             return true;
         }
 
-        public async Task<IEnumerable<ReservationReadDto>> GetReservationsByCustomerAsync(int customerId)
+        public async Task<IEnumerable<ReservationReadDto>?> GetReservationsByCustomerAsync(int customerId)
         {
             var reservations = await _reservationRepository.GetReservationsByCustomerAsync(customerId);
             if (!reservations.Any())
@@ -69,13 +69,7 @@ namespace RestaurantReservation.API.BusinessLogic.Services
                 return null;
             }
 
-            var reservationsList = _mapper.Map<IEnumerable<ReservationReadDto>>(reservations);
-            return reservationsList;
-        }
-
-        public async Task<IEnumerable<ReservationView>> ListReservationViewAsync()
-        {
-            return await _reservationRepository.ListReservationViewAsync();
+            return _mapper.Map<IEnumerable<ReservationReadDto>>(reservations);
         }
     }
 }

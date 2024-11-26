@@ -1,5 +1,4 @@
 ﻿using RestaurantReservation.API.BusinessLogic.DTOs;
-using RestaurantReservation.Db.DataModels;
 
 namespace RestaurantReservation.API.BusinessLogic.ServicesInterfaces
 {
@@ -8,7 +7,7 @@ namespace RestaurantReservation.API.BusinessLogic.ServicesInterfaces
         Task CreateCustomerAsync(CustomerCreateDto customerCreateDto);
         Task<bool> DeleteCustomerAsync(int id);
         Task<PaginatedResult<CustomerReadDto>> GetAllCustomersAsync(int pageNumber, int pageSize);
-        Task<Customer> GetCustomerByIdAsync(int id);
+        Task<CustomerReadDto> GetCustomerByIdAsync(int id);
         Task<bool> UpdateCustomerAsync(int id, CustomerUpdateDto customerUpdateDto);
     }
 }
